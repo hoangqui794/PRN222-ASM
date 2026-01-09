@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EyewearShop.Data.Models;
+namespace EyewearShop.MVC.Models;
 
-public partial class Prescription
+public partial class PrescriptionPhuHn
 {
     public int PrescriptionId { get; set; }
 
@@ -37,7 +37,7 @@ public partial class Prescription
 
     public DateTime? CreatedAt { get; set; }
 
-    public virtual ICollection<LensService> LensServices { get; set; } = new List<LensService>();
+    public virtual ICollection<LensServicePhuHn> LensServicePhuHns { get; set; } = new List<LensServicePhuHn>();
 
     public virtual OrderNamtmh Order { get; set; } = null!;
 
