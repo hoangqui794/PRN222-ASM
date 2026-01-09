@@ -1,0 +1,77 @@
+﻿@model EyewearShop.Data.Models.ProductTriCh
+
+@{
+    ViewData["Title"] = Model.ProductName;
+
+    // Ảnh mặc định ban đầu (ưu tiên ảnh Primary)
+    var defaultImg = Model.ProductImageTriChes.FirstOrDefault(x => x.IsPrimary == true)?.ImageUrl
+                     ?? Model.ProductImageTriChes.FirstOrDefault()?.ImageUrl
+                     ?? "https://via.placeholder.com/500";
+}
+
+<div class="container my-5">
+    <a asp-action="Index" class="btn btn-link text-decoration-none mb-3">⬅ Quay lại danh sách</a>
+
+    <div class="row shadow-lg p-4 rounded bg-white">
+        <div class="col-md-5 text-center">
+            <img id="mainImage" src="@defaultImg" class="img-fluid rounded mb-3" style="max-height: 400px; object-fit: contain;">
+        </div>
+
+        <div class="col-md-7">
+            <h2 class="fw-bold">@Model.ProductName</h2>
+            <h3 class="text-danger my-3">@Model.Price.ToString("N0") VNĐ</h3>
+
+            <div class="mb-4">
+                <h6 class="fw-bold">Màu sắc tùy chọn:</h6>
+                <div class="d-flex flex-wrap gap-3">
+                    @foreach (var color in Model.ProductColorTriChes)
+                    {
+                        // Tìm ảnh tương ứng với màu này (nếu có)
+                        var imgOfThisColor = Model.ProductImageTriChes.FirstOrDefault(x => x.ColorId == color.ColorId)?.ImageUrl;
+
+                        // Nếu màu này không có ảnh riêng, lấy ảnh mặc định
+                        if (string.IsNullOrEmpty(imgOfThisColor)) imgOfThisColor = defaultImg;
+
+                        <div class="color-option d-flex align-items-center border rounded p-2"
+                             style="cursor: pointer;"
+                             onclick="changeImage('@imgOfThisColor')">
+
+                            <div class="rounded-circle border shadow-sm me-2"
+                                 style="width: 25px; height: 25px; background-color: @color.ColorCode;">
+                            </div>
+                            <div>
+                                <span class="fw-bold d-block" style="font-size: 0.9rem;">@color.ColorName</span>
+                                <small class="text-muted">Còn: @color.StockQuantity</small>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="p-3 bg-light rounded mb-3">
+                <ul class="mb-0 list-unstyled">
+                    <li><strong>Loại gọng:</strong> @Model.FrameType</li>
+                    <li><strong>Chất liệu:</strong> @Model.Material</li>
+                    <li><strong>Kích thước:</strong> @Model.Dimensions</li>
+                </ul>
+            </div>
+            <p>@Model.Description</p>
+            <button class="btn btn-danger btn-lg px-5 mt-3">🛒 Thêm vào giỏ</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeImage(newUrl) {
+        // Tìm thẻ img có id="mainImage" và thay đổi đường dẫn src
+        document.getElementById('mainImage').src = newUrl;
+    }
+</script>
+
+<style>
+    /* Hiệu ứng khi rê chuột vào nút chọn màu */
+    .color-option:hover {
+        background-color: #f8f9fa;
+        border-color: #0d6efd !important;
+    }
+</style>

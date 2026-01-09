@@ -1,0 +1,56 @@
+﻿@model IEnumerable<EyewearShop.Data.Models.ProductTriCh>
+
+@{
+    ViewData["Title"] = "Cửa hàng mắt kính";
+}
+
+<div class="container my-4">
+    <h2 class="text-center mb-4">👓 Cửa hàng Mắt Kính TriCH</h2>
+
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-6">
+            <form asp-controller="Product" asp-action="Index" method="get">
+                <div class="input-group">
+                    <input type="text" name="searchString" class="form-control"
+                           placeholder="Tìm kính, gọng, thương hiệu..."
+                           value="@ViewBag.CurrentFilter">
+                    <button class="btn btn-primary" type="submit">🔍 Tìm kiếm</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Xóa</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        @if (!Model.Any())
+        {
+            <div class="col-12 text-center">
+                <div class="alert alert-warning">Không tìm thấy sản phẩm nào phù hợp! 😢</div>
+            </div>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                // Lấy ảnh đại diện (ưu tiên ảnh Primary, nếu ko có lấy ảnh đầu tiên)
+                var thumb = item.ProductImageTriChes.FirstOrDefault(x => x.IsPrimary == true)?.ImageUrl
+                ?? item.ProductImageTriChes.FirstOrDefault()?.ImageUrl
+                ?? "https://via.placeholder.com/300x200?text=No+Image";
+
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="@thumb" class="card-img-top p-2" alt="@item.ProductName" style="height: 200px; object-fit: contain;">
+                        <div class="card-body">
+                            <h6 class="card-title text-truncate" title="@item.ProductName">@item.ProductName</h6>
+                            <p class="small text-muted mb-1">@item.Category?.CategoryName</p>
+                            <h5 class="text-danger fw-bold">@item.Price.ToString("N0") đ</h5>
+                        </div>
+                        <div class="card-footer bg-white border-top-0 d-grid">
+                            <a asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
