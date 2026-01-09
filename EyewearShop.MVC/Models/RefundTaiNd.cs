@@ -5,7 +5,7 @@ namespace EyewearShop.MVC.Models;
 
 public partial class RefundTaiNd
 {
-    public int RefundId { get; set; }
+    public int RefundIdTaiNd { get; set; }
 
     public int RequestId { get; set; }
 

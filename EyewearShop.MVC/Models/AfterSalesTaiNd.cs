@@ -5,7 +5,7 @@ namespace EyewearShop.MVC.Models;
 
 public partial class AfterSalesTaiNd
 {
-    public int RequestId { get; set; }
+    public int RequestIdTaiNd { get; set; }
 
     public int OrderId { get; set; }
 

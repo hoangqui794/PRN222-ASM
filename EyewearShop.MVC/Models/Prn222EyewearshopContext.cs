@@ -57,11 +57,11 @@ public partial class Prn222EyewearshopContext : DbContext
     {
         modelBuilder.Entity<AfterSalesTaiNd>(entity =>
         {
-            entity.HasKey(e => e.RequestId).HasName("PK__AfterSal__E3C5DE516E658BA9");
+            entity.HasKey(e => e.RequestIdTaiNd).HasName("PK__AfterSal__E3C5DE516E658BA9");
 
             entity.ToTable("AfterSalesTaiND");
 
-            entity.Property(e => e.RequestId).HasColumnName("requestID");
+            entity.Property(e => e.RequestIdTaiNd).HasColumnName("requestIDTaiND");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
@@ -547,11 +547,11 @@ public partial class Prn222EyewearshopContext : DbContext
 
         modelBuilder.Entity<RefundTaiNd>(entity =>
         {
-            entity.HasKey(e => e.RefundId).HasName("PK__RefundTa__B21984EFADC39F00");
+            entity.HasKey(e => e.RefundIdTaiNd).HasName("PK__RefundTa__B21984EFADC39F00");
 
             entity.ToTable("RefundTaiND");
 
-            entity.Property(e => e.RefundId).HasColumnName("refundID");
+            entity.Property(e => e.RefundIdTaiNd).HasColumnName("refundIDTaiND");
             entity.Property(e => e.RefundAmount)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("refundAmount");
@@ -563,7 +563,7 @@ public partial class Prn222EyewearshopContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .HasColumnName("refundMethod");
-            entity.Property(e => e.RequestId).HasColumnName("requestID");
+            entity.Property(e => e.RequestId).HasColumnName("requestIDTaiND");
             entity.Property(e => e.TransactionId)
                 .HasMaxLength(100)
                 .IsUnicode(false)
@@ -571,6 +571,7 @@ public partial class Prn222EyewearshopContext : DbContext
 
             entity.HasOne(d => d.Request).WithMany(p => p.RefundTaiNds)
                 .HasForeignKey(d => d.RequestId)
+                .HasPrincipalKey(d => d.RequestIdTaiNd)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Refund_AfterSales");
         });

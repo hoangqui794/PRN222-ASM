@@ -4,6 +4,7 @@ using EyewearShop.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EyewearShop.Data.Migrations
 {
     [DbContext(typeof(Prn222EyewearshopContext))]
-    partial class Prn222EyewearshopContextModelSnapshot : ModelSnapshot
+    [Migration("20260109055135_RenameRequestIdAndRefundId")]
+    partial class RenameRequestIdAndRefundId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
