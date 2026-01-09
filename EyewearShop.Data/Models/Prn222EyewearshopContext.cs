@@ -22,15 +22,15 @@ public partial class Prn222EyewearshopContext : DbContext
 
     public virtual DbSet<CustomerSupportQuiTh> CustomerSupportQuiThs { get; set; }
 
-    public virtual DbSet<LensService> LensServices { get; set; }
+    public virtual DbSet<LensServicePhuHn> LensServicePhuHns { get; set; }
 
     public virtual DbSet<OrderItemNamtmh> OrderItemNamtmhs { get; set; }
 
     public virtual DbSet<OrderNamtmh> OrderNamtmhs { get; set; }
 
-    public virtual DbSet<OrderReviewQuiTquiTh> OrderReviewQuiTquiThs { get; set; }
+    public virtual DbSet<OrderReviewQuiTh> OrderReviewQuiThs { get; set; }
 
-    public virtual DbSet<Prescription> Prescriptions { get; set; }
+    public virtual DbSet<PrescriptionPhuHn> PrescriptionPhuHns { get; set; }
 
     public virtual DbSet<ProductColorTriCh> ProductColorTriChes { get; set; }
 
@@ -71,7 +71,7 @@ public partial class Prn222EyewearshopContext : DbContext
     {
         modelBuilder.Entity<AfterSalesTaiNd>(entity =>
         {
-            entity.HasKey(e => e.RequestId).HasName("PK__AfterSal__E3C5DE512967C6C5");
+            entity.HasKey(e => e.RequestId).HasName("PK__AfterSal__E3C5DE516E658BA9");
 
             entity.ToTable("AfterSalesTaiND");
 
@@ -122,11 +122,11 @@ public partial class Prn222EyewearshopContext : DbContext
 
         modelBuilder.Entity<CategoryTriCh>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__Category__23CAF1F8F7F9408D");
+            entity.HasKey(e => e.CategoryId).HasName("PK__Category__23CAF1F82FBC8D54");
 
             entity.ToTable("CategoryTriCH");
 
-            entity.HasIndex(e => e.Slug, "UQ__Category__32DD1E4C17DA59BF").IsUnique();
+            entity.HasIndex(e => e.Slug, "UQ__Category__32DD1E4C987C5815").IsUnique();
 
             entity.Property(e => e.CategoryId).HasColumnName("categoryID");
             entity.Property(e => e.CategoryName)
@@ -143,7 +143,7 @@ public partial class Prn222EyewearshopContext : DbContext
 
         modelBuilder.Entity<CustomerSupportQuiTh>(entity =>
         {
-            entity.HasKey(e => e.SupportId).HasName("PK__Customer__E6765E7459D1F19A");
+            entity.HasKey(e => e.SupportId).HasName("PK__Customer__E6765E74F617EED8");
 
             entity.ToTable("CustomerSupportQuiTH");
 
@@ -174,11 +174,11 @@ public partial class Prn222EyewearshopContext : DbContext
                 .HasConstraintName("FK_CustomerSupport_Staff");
         });
 
-        modelBuilder.Entity<LensService>(entity =>
+        modelBuilder.Entity<LensServicePhuHn>(entity =>
         {
-            entity.HasKey(e => e.ServiceId).HasName("PK__LensServ__4550733F35F69499");
+            entity.HasKey(e => e.ServiceId).HasName("PK__LensServ__4550733F4A94C787");
 
-            entity.ToTable("LensService");
+            entity.ToTable("LensServicePhuHN");
 
             entity.Property(e => e.ServiceId).HasColumnName("serviceID");
             entity.Property(e => e.CoatingType)
@@ -190,7 +190,7 @@ public partial class Prn222EyewearshopContext : DbContext
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("servicePrice");
 
-            entity.HasOne(d => d.Prescription).WithMany(p => p.LensServices)
+            entity.HasOne(d => d.Prescription).WithMany(p => p.LensServicePhuHns)
                 .HasForeignKey(d => d.PrescriptionId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_LensService_Prescription");
@@ -198,7 +198,7 @@ public partial class Prn222EyewearshopContext : DbContext
 
         modelBuilder.Entity<OrderItemNamtmh>(entity =>
         {
-            entity.HasKey(e => e.OrderItemId).HasName("PK__OrderIte__3724BD72449E6FED");
+            entity.HasKey(e => e.OrderItemId).HasName("PK__OrderIte__3724BD722EB7F15C");
 
             entity.ToTable("OrderItemNamtmh");
 
@@ -218,11 +218,11 @@ public partial class Prn222EyewearshopContext : DbContext
 
         modelBuilder.Entity<OrderNamtmh>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__OrderNam__0809337D2809506C");
+            entity.HasKey(e => e.OrderId).HasName("PK__OrderNam__0809337D8568EEE2");
 
             entity.ToTable("OrderNamtmh");
 
-            entity.HasIndex(e => e.OrderNumber, "UQ__OrderNam__6296129FD6C6BE67").IsUnique();
+            entity.HasIndex(e => e.OrderNumber, "UQ__OrderNam__6296129FE3780149").IsUnique();
 
             entity.Property(e => e.OrderId).HasColumnName("orderID");
             entity.Property(e => e.CreatedAt)
@@ -277,11 +277,11 @@ public partial class Prn222EyewearshopContext : DbContext
                 .HasConstraintName("FK_OrderNamtmh_User");
         });
 
-        modelBuilder.Entity<OrderReviewQuiTquiTh>(entity =>
+        modelBuilder.Entity<OrderReviewQuiTh>(entity =>
         {
-            entity.HasKey(e => e.ReviewId).HasName("PK__OrderRev__2ECD6E244F16D70F");
+            entity.HasKey(e => e.ReviewId).HasName("PK__OrderRev__2ECD6E24DC647161");
 
-            entity.ToTable("OrderReviewQuiTQuiTH");
+            entity.ToTable("OrderReviewQuiTH");
 
             entity.Property(e => e.ReviewId).HasColumnName("reviewID");
             entity.Property(e => e.ContactMethod)
@@ -314,17 +314,17 @@ public partial class Prn222EyewearshopContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("updatedAt");
 
-            entity.HasOne(d => d.Staff).WithMany(p => p.OrderReviewQuiTquiThs)
+            entity.HasOne(d => d.Staff).WithMany(p => p.OrderReviewQuiThs)
                 .HasForeignKey(d => d.StaffId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_OrderReview_Staff");
         });
 
-        modelBuilder.Entity<Prescription>(entity =>
+        modelBuilder.Entity<PrescriptionPhuHn>(entity =>
         {
-            entity.HasKey(e => e.PrescriptionId).HasName("PK__Prescrip__7920FDC44A79D517");
+            entity.HasKey(e => e.PrescriptionId).HasName("PK__Prescrip__7920FDC4121888B2");
 
-            entity.ToTable("Prescription");
+            entity.ToTable("PrescriptionPhuHN");
 
             entity.Property(e => e.PrescriptionId).HasColumnName("prescriptionID");
             entity.Property(e => e.CreatedAt)
@@ -365,12 +365,12 @@ public partial class Prn222EyewearshopContext : DbContext
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("totalPrice");
 
-            entity.HasOne(d => d.Order).WithMany(p => p.Prescriptions)
+            entity.HasOne(d => d.Order).WithMany(p => p.PrescriptionPhuHns)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Prescription_Order");
 
-            entity.HasOne(d => d.OrderItem).WithMany(p => p.Prescriptions)
+            entity.HasOne(d => d.OrderItem).WithMany(p => p.PrescriptionPhuHns)
                 .HasForeignKey(d => d.OrderItemId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Prescription_OrderItem");
@@ -378,7 +378,7 @@ public partial class Prn222EyewearshopContext : DbContext
 
         modelBuilder.Entity<ProductColorTriCh>(entity =>
         {
-            entity.HasKey(e => e.ColorId).HasName("PK__ProductC__70A64C3D72ABF221");
+            entity.HasKey(e => e.ColorId).HasName("PK__ProductC__70A64C3DF233A12F");
 
             entity.ToTable("ProductColorTriCH");
 
@@ -401,7 +401,7 @@ public partial class Prn222EyewearshopContext : DbContext
 
         modelBuilder.Entity<ProductImageTriCh>(entity =>
         {
-            entity.HasKey(e => e.ImageId).HasName("PK__ProductI__336E9B758D33E82F");
+            entity.HasKey(e => e.ImageId).HasName("PK__ProductI__336E9B75390B8242");
 
             entity.ToTable("ProductImageTriCH");
 
@@ -429,7 +429,7 @@ public partial class Prn222EyewearshopContext : DbContext
 
         modelBuilder.Entity<ProductReviewMiLtt>(entity =>
         {
-            entity.HasKey(e => e.ReviewId).HasName("PK__ProductR__2ECD6E24E919D5C7");
+            entity.HasKey(e => e.ReviewId).HasName("PK__ProductR__2ECD6E245C0781AD");
 
             entity.ToTable("ProductReviewMiLTT");
 
@@ -474,11 +474,11 @@ public partial class Prn222EyewearshopContext : DbContext
 
         modelBuilder.Entity<ProductTriCh>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__ProductT__2D10D14AEF909649");
+            entity.HasKey(e => e.ProductId).HasName("PK__ProductT__2D10D14A39D9516B");
 
             entity.ToTable("ProductTriCH");
 
-            entity.HasIndex(e => e.Sku, "UQ__ProductT__DDDF4BE77ED38C85").IsUnique();
+            entity.HasIndex(e => e.Sku, "UQ__ProductT__DDDF4BE7E8CDACB7").IsUnique();
 
             entity.Property(e => e.ProductId).HasColumnName("productID");
             entity.Property(e => e.Brand)
@@ -526,11 +526,11 @@ public partial class Prn222EyewearshopContext : DbContext
 
         modelBuilder.Entity<ProductionSonKn>(entity =>
         {
-            entity.HasKey(e => e.ProductionSonKnid).HasName("PK__Producti__10BAB7205B23F007");
+            entity.HasKey(e => e.ProductionSonKnid).HasName("PK__Producti__10BAB72022A4AF42");
 
             entity.ToTable("ProductionSonKN");
 
-            entity.HasIndex(e => e.ShipmentSonKnid, "UQ__Producti__83D5390EB74BFE4E").IsUnique();
+            entity.HasIndex(e => e.ShipmentSonKnid, "UQ__Producti__83D5390ECDAA73F4").IsUnique();
 
             entity.Property(e => e.ProductionSonKnid).HasColumnName("ProductionSonKNId");
             entity.Property(e => e.CreatedAt)
@@ -561,7 +561,7 @@ public partial class Prn222EyewearshopContext : DbContext
 
         modelBuilder.Entity<RefundTaiNd>(entity =>
         {
-            entity.HasKey(e => e.RefundId).HasName("PK__RefundTa__B21984EF8566161B");
+            entity.HasKey(e => e.RefundId).HasName("PK__RefundTa__B21984EFADC39F00");
 
             entity.ToTable("RefundTaiND");
 
@@ -591,7 +591,7 @@ public partial class Prn222EyewearshopContext : DbContext
 
         modelBuilder.Entity<ReviewImageMiLtt>(entity =>
         {
-            entity.HasKey(e => e.ImageId).HasName("PK__ReviewIm__336E9B75D19AE5AC");
+            entity.HasKey(e => e.ImageId).HasName("PK__ReviewIm__336E9B7594259719");
 
             entity.ToTable("ReviewImageMiLTT");
 
@@ -613,7 +613,7 @@ public partial class Prn222EyewearshopContext : DbContext
 
         modelBuilder.Entity<ShipmentSonKn>(entity =>
         {
-            entity.HasKey(e => e.ShipmentSonKnid).HasName("PK__Shipment__83D5390F3075D367");
+            entity.HasKey(e => e.ShipmentSonKnid).HasName("PK__Shipment__83D5390FF93A66D2");
 
             entity.ToTable("ShipmentSonKN");
 
@@ -625,11 +625,11 @@ public partial class Prn222EyewearshopContext : DbContext
 
         modelBuilder.Entity<UserAccount>(entity =>
         {
-            entity.HasKey(e => e.UserAccountId).HasName("PK__UserAcco__DA6C70BA00DA45DD");
+            entity.HasKey(e => e.UserAccountId).HasName("PK__UserAcco__DA6C70BA081FDE0E");
 
             entity.ToTable("UserAccount");
 
-            entity.HasIndex(e => e.UserName, "UQ__UserAcco__C9F28456177300C0").IsUnique();
+            entity.HasIndex(e => e.UserName, "UQ__UserAcco__C9F28456452386CA").IsUnique();
 
             entity.Property(e => e.UserAccountId).HasColumnName("UserAccountID");
             entity.Property(e => e.ApplicationCode)

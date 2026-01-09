@@ -41,7 +41,7 @@ public partial class UserAccount
 
     public virtual ICollection<OrderNamtmh> OrderNamtmhs { get; set; } = new List<OrderNamtmh>();
 
-    public virtual ICollection<OrderReviewQuiTquiTh> OrderReviewQuiTquiThs { get; set; } = new List<OrderReviewQuiTquiTh>();
+    public virtual ICollection<OrderReviewQuiTh> OrderReviewQuiThs { get; set; } = new List<OrderReviewQuiTh>();
 
     public virtual ICollection<ProductReviewMiLtt> ProductReviewMiLtts { get; set; } = new List<ProductReviewMiLtt>();
 

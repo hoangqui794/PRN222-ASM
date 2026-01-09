@@ -39,7 +39,7 @@ public partial class OrderNamtmh
 
     public virtual ICollection<OrderItemNamtmh> OrderItemNamtmhs { get; set; } = new List<OrderItemNamtmh>();
 
-    public virtual ICollection<Prescription> Prescriptions { get; set; } = new List<Prescription>();
+    public virtual ICollection<PrescriptionPhuHn> PrescriptionPhuHns { get; set; } = new List<PrescriptionPhuHn>();
 
     public virtual ICollection<ProductReviewMiLtt> ProductReviewMiLtts { get; set; } = new List<ProductReviewMiLtt>();
 

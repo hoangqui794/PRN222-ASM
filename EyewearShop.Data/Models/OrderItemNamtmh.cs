@@ -19,5 +19,5 @@ public partial class OrderItemNamtmh
 
     public virtual OrderNamtmh Order { get; set; } = null!;
 
-    public virtual ICollection<Prescription> Prescriptions { get; set; } = new List<Prescription>();
+    public virtual ICollection<PrescriptionPhuHn> PrescriptionPhuHns { get; set; } = new List<PrescriptionPhuHn>();
 }
