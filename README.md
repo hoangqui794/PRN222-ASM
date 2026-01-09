@@ -76,3 +76,5 @@ git merge dev  # Cập nhật code mới nhất vào nhánh của mình
 
 ## Team Members
 - Cao Hữu Trí Phèn
+- Hoàng Quí DZ
+  
