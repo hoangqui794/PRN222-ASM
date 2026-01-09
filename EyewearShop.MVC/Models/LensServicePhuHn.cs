@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EyewearShop.Data.Models;
+namespace EyewearShop.MVC.Models;
 
-public partial class LensService
+public partial class LensServicePhuHn
 {
     public int ServiceId { get; set; }
 
@@ -15,5 +15,5 @@ public partial class LensService
 
     public decimal ServicePrice { get; set; }
 
-    public virtual Prescription Prescription { get; set; } = null!;
+    public virtual PrescriptionPhuHn Prescription { get; set; } = null!;
 }

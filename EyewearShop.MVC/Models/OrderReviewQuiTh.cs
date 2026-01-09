@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EyewearShop.Data.Models;
+namespace EyewearShop.MVC.Models;
 
-public partial class OrderReviewQuiTquiTh
+public partial class OrderReviewQuiTh
 {
     public int ReviewId { get; set; }
 
